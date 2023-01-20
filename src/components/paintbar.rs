@@ -1,6 +1,11 @@
 use yew::prelude::*;
+use crate::css;
+use crate::webgl_components::colorwheel::Colorwheel;
+use std::collections::HashMap;
 
-pub struct Paintbar;
+pub struct Paintbar{
+    stl: HashMap<String,String>
+}
 
 #[derive(Clone, Eq, PartialEq, Properties)]
 pub struct Paintbarprops {
@@ -13,16 +18,21 @@ impl Component for Paintbar {
     type Properties = Paintbarprops;
 
     fn create(_ctx: &Context<Self>) -> Self {
-        Self {}
+        Self {
+            stl: css::paintbar::styles()
+        }
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
         let msg = format!("My parent has been clicked {} times", ctx.props().clicks);
         let test_msg = ctx.props().test_string.clone();
         html! {
-            <div class="child">
-                <div>{msg}</div>
-                <div>{r#"this is the test_string: "#}{test_msg}</div>
+            <div>
+                {r#"test 1"#}
+                <div style = {self.stl["colorwheelcontainer"].clone()}>
+                    {r#"testy test"#}
+                    <Colorwheel/>
+                </div>
             </div>
         }
     }

@@ -1445,9 +1445,11 @@ name = "yew_page"
 version = "0.1.0"
 dependencies = [
  "gloo-net",
+ "js-sys",
  "log",
  "reqwest",
  "route",
+ "wasm-bindgen",
  "wasm-bindgen-futures",
  "wasm-logger",
  "web-sys",
