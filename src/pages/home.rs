@@ -1,10 +1,12 @@
 use yew::prelude::*;
 use wasm_bindgen_futures::spawn_local;
 use reqwest::header::USER_AGENT;
-
+use std::collections::HashMap;
+use crate::css;
 
 pub struct Home{
-    test_string: String
+    test_string: String,
+    stl: HashMap<String,String>
 }
 
 pub enum Msg {
@@ -35,7 +37,8 @@ impl Component for Home {
         spawn_local(async{
             let test = get_test().await;
         });
-        Self {test_string: "somethingsomething".to_string()}
+        
+        Self {test_string: "somethingsomething".to_string(), stl: css::home::styles()}
     }
 
     fn update(&mut self, _ctx: &Context<Self>, msg:Self::Message) -> bool {
@@ -50,7 +53,7 @@ impl Component for Home {
 
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
-            <div class="tile is-ancestor is-vertical">
+            <div style={self.stl["main"].clone()} class="tile is-ancestor is-vertical">
                 <div class="tile is-child hero">
                     <div class="hero-body container pb-0">
                         <h1 class="title is-1">{ "Welcome..." }</h1>
